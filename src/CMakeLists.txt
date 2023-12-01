@@ -333,7 +333,7 @@ set(VM_DASC_PATH ${CMAKE_CURRENT_SOURCE_DIR}/vm_${DASM_ARCH}.dasc)
 if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
   execute_process(COMMAND git show -s "--format=%ct" OUTPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/luajit_relver.txt")
 else()
-  copy("${CMAKE_CURRENT_SOURCE_DIR}/../.relver" "${CMAKE_CURRENT_BINARY_DIR}/luajit_relver.txt" COPYONLY)
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/../.relver" "${CMAKE_CURRENT_BINARY_DIR}/luajit_relver.txt" COPYONLY)
 endif()
 
 add_custom_command(OUTPUT ${LJ_LUAJIT_PATH}
