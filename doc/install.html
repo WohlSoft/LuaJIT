@@ -3,7 +3,7 @@
 <head>
 <title>Installation</title>
 <meta charset="utf-8">
-<meta name="Copyright" content="Copyright (C) 2005-2023">
+<meta name="Copyright" content="Copyright (C) 2005-2025">
 <meta name="Language" content="en">
 <link rel="stylesheet" type="text/css" href="bluequad.css" media="screen">
 <link rel="stylesheet" type="text/css" href="bluequad-print.css" media="print">
@@ -117,7 +117,7 @@ hold all user-configurable settings:
 <li><tt>Makefile</tt> has settings for <b>installing</b> LuaJIT (POSIX
 only).</li>
 <li><tt>src/Makefile</tt> has settings for <b>compiling</b> LuaJIT
-under POSIX, MinGW or Cygwin.</li>
+under POSIX or MinGW.</li>
 <li><tt>src/msvcbuild.bat</tt> has settings for compiling LuaJIT with
 MSVC (Visual Studio).</li>
 </ul>
@@ -195,10 +195,8 @@ Obviously the prefixes given during build and installation need to be the same.
 <h2 id="windows">Windows Systems</h2>
 <h3>Prerequisites</h3>
 <p>
-Either install one of the open source SDKs
-(<a href="http://mingw.org/"><span class="ext">&raquo;</span>&nbsp;MinGW</a> or
-<a href="https://www.cygwin.com/"><span class="ext">&raquo;</span>&nbsp;Cygwin</a>), which come with a modified
-GCC plus the required development headers.
+Either install the open source SDK <a href="http://mingw.org/"><span class="ext">&raquo;</span>&nbsp;MinGW</a>,
+which comes with a modified GCC plus the required development headers.
 Or install Microsoft's Visual Studio (MSVC).
 </p>
 <h3>Building with MSVC</h3>
@@ -217,20 +215,14 @@ Then follow the installation instructions below.
 <p>
 For an x64 to ARM64 cross-build run this first: <tt>vcvarsall.bat x64_arm64</tt>
 </p>
-<h3>Building with MinGW or Cygwin</h3>
+<h3>Building with MinGW</h3>
 <p>
-Open a command prompt window and make sure the MinGW or Cygwin programs
+Open a command prompt window and make sure the MinGW programs
 are in your path. Then <tt>cd</tt> to the directory of the git repository.
 Then run this command for MinGW:
 </p>
 <pre class="code">
 mingw32-make
-</pre>
-<p>
-Or this command for Cygwin:
-</p>
-<pre class="code">
-make
 </pre>
 <p>
 Then follow the installation instructions below.
@@ -249,6 +241,19 @@ absolute path names &mdash; all modules are loaded relative to the
 directory where <tt>luajit.exe</tt> is installed
 (see <tt>src/luaconf.h</tt>).
 </p>
+<p>
+The final directory layout should look like this:
+</p>
+<pre class="code">
+├── luajit.exe
+├── lua51.dll
+├── <- put your own classic Lua/C API modules (*.dll) here
+└── lua
+    ├── <- put your own Lua modules (*.lua) here
+    └── jit
+        ├── bc.lua
+        └── (etc …)
+</pre>
 
 <h2 id="cross">Cross-compiling LuaJIT</h2>
 <p>
@@ -269,6 +274,7 @@ for any supported target:
 <li>Yes, you need a toolchain for both your host <em>and</em> your target!</li>
 <li>Both host and target architectures must have the same pointer size.</li>
 <li>E.g. if you want to cross-compile to a 32 bit target on a 64 bit host, you need to install the multilib development package (e.g. <tt>libc6-dev-i386</tt> on Debian/Ubuntu) and build a 32 bit host part (<tt>HOST_CC="gcc -m32"</tt>).</li>
+<li>On some distro versions, multilib conflicts with cross-compilers. The workaround is to install the x86 cross-compiler package <tt>gcc-i686-linux-gnu</tt> and use it to build the host part (<tt>HOST_CC=i686-linux-gnu-gcc</tt>).</li>
 <li>64 bit targets always require compilation on a 64 bit host.</li>
 </ul>
 <p>
@@ -571,7 +577,7 @@ to me (the upstream) and not you (the package maintainer), anyway.
 </div>
 <div id="foot">
 <hr class="hide">
-Copyright &copy; 2005-2023
+Copyright &copy; 2005-2025
 <span class="noprint">
 &middot;
 <a href="contact.html">Contact</a>
