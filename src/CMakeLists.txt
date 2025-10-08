@@ -446,7 +446,7 @@ add_custom_command(
   COMMAND ${BUILDVM_PATH} -m ffdef -o ${LJ_FFDEF_PATH} ${LJ_LIB_SOURCES}
   COMMAND ${BUILDVM_PATH} -m bcdef -o ${LJ_BCDEF_PATH} ${LJ_LIB_SOURCES}
   COMMAND ${BUILDVM_PATH} -m vmdef -o ${LJ_VMDEF_PATH} ${LJ_LIB_SOURCES}
-  DEPENDS buildvm ${LJ_LIB_SOURCE}
+  DEPENDS buildvm ${LJ_LIB_SOURCES}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/)
 
 add_custom_target(lj_gen_headers ALL
